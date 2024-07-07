@@ -2,7 +2,7 @@ import multer from "multer";
 
 import { allowedExtensions } from "../utils/allowedExtensions.js";
 
-export const mullterMiddleHost = ({ extension = allowedExtensions.Resume }) => {
+export const mullterMiddleHost = ({ extension = allowedExtensions.image }) => {
   const storage = multer.diskStorage({});
 
   const fileFilter = (req, file, cb) => {
@@ -17,6 +17,7 @@ export const mullterMiddleHost = ({ extension = allowedExtensions.Resume }) => {
       // Reject the file with an error message
       return cb(new Error("Invalid file extension"));
     }
+    
   };
   const file = multer({ fileFilter, storage });
   return file;

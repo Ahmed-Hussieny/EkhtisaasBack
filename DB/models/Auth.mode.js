@@ -4,12 +4,10 @@ const AuthSchema = new Schema({
     name: {
         type: String,
         required: [true, "Please provide your First Name"],
-        lowercase: true
     },
     userName: {
         type: String,
         required: [true, "Please provide your Last Name"],
-        lowercase: true,
         unique: true,
     },
     email: {

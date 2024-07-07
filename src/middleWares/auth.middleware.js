@@ -24,7 +24,7 @@ export const auth = (accessRoles) => {
             req.authUser = findUser
             next()
         } catch (error) {
-            // console.log(error);
+            console.log(error);
             next(new Error('catch error in auth middleware', { cause: 500 }))
         }
     }
