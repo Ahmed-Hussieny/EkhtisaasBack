@@ -34,12 +34,10 @@ MainSpecialtyRouter.delete(
 
 MainSpecialtyRouter.get(
   "/GetAllMainSpecialties",
-  auth(MainSpecialtyRoles.GetMainSpecialty),
   expressAsyncHandler(MainSpecialtyController.GetAllMainSpecialties)
 );
 MainSpecialtyRouter.get(
   "/GetSingleMainSpecialty/:id",
-  auth(MainSpecialtyRoles.GetMainSpecialty),
   expressAsyncHandler(MainSpecialtyController.GetSingleMainSpecialty)
 );
 

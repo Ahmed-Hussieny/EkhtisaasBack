@@ -47,8 +47,6 @@ const AdvisorSchema = new Schema({
     },
     Rate:{
         type:Number,
-        required:true,
-    
     }
 
 },{

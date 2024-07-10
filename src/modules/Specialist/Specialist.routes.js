@@ -30,8 +30,8 @@ SpecialistRouter.post(
 
 
 SpecialistRouter.delete('/deleteSpecialist/:id',auth(SpecialistRoles.DeleteSpecialist), expressAsyncHandler(SpecialistController.DeleteSpecialist))
-SpecialistRouter.get('/GetAllSpecialists',auth(SpecialistRoles.GetSpecialist), expressAsyncHandler(SpecialistController.GetAllSpecialists))
+SpecialistRouter.get('/GetAllSpecialists', expressAsyncHandler(SpecialistController.GetAllSpecialists))
 
-SpecialistRouter.get('/GetSingleSpecialist/:id',auth(SpecialistRoles.GetSpecialist), expressAsyncHandler(SpecialistController.GetSingleSpecialist))
+SpecialistRouter.get('/GetSingleSpecialist/:id', expressAsyncHandler(SpecialistController.GetSingleSpecialist))
 
 export default SpecialistRouter

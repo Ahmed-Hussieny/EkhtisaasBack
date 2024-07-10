@@ -74,12 +74,12 @@ UserRoute.get(
 
 UserRoute.get(
   "/CountOfVisitors",
-  auth(endpointsRoles.GETALLUSERS),
+  // auth(endpointsRoles.GETALLUSERS),
   expressAsyncHandler(UserController.CountOfVisitors)
 );
 UserRoute.get(
   "/CountOfVisitorsForsingle/:id",
-  auth(endpointsRoles.GETALLUSERS),
+  // auth(endpointsRoles.GETALLUSERS),
   expressAsyncHandler(UserController.CountOfVisitorsForsingle)
 );
 UserRoute.post(

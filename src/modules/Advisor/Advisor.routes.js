@@ -30,8 +30,8 @@ AdvisorRouter.post(
 
 
 AdvisorRouter.delete('/deleteAdvisor/:id',auth(AdvisorRoles.DeleteAdvisor), expressAsyncHandler(AdvisorController.DeleteAdvisor))
-AdvisorRouter.get('/GetAllAdvisors',auth(AdvisorRoles.GetAdvisor), expressAsyncHandler(AdvisorController.GetAllAdvisors))
+AdvisorRouter.get('/GetAllAdvisors', expressAsyncHandler(AdvisorController.GetAllAdvisors))
 
-AdvisorRouter.get('/GetSingleAdvisor/:id',auth(AdvisorRoles.GetAdvisor), expressAsyncHandler(AdvisorController.GetSingleAdvisor))
+AdvisorRouter.get('/GetSingleAdvisor/:id', expressAsyncHandler(AdvisorController.GetSingleAdvisor))
 
 export default AdvisorRouter

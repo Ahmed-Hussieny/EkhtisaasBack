@@ -53,7 +53,6 @@ const SpecialistSchema = new Schema({
     },
     Rate:{
         type:Number,
-        required:true,
     
     }
 

@@ -32,12 +32,12 @@ SubSpecialtyRouter.delete(
   );
   SubSpecialtyRouter.get(
     "/GetAllSubSpecialties",
-    auth(SubSpecialtyRoles.GetSubSpecialty),
+   
     expressAsyncHandler(SubSpecialtyController.GetAllSubSpecialties)
   );
   SubSpecialtyRouter.get(
     "/GetSingleSubSpecialty/:id",
-    auth(SubSpecialtyRoles.GetSubSpecialty),
+   
     expressAsyncHandler(SubSpecialtyController.GetSingleSubSpecialty)
   );
 export default SubSpecialtyRouter
