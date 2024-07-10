@@ -13,7 +13,7 @@ CertificateRouter.post("/AddCertificate",auth(CertificateRoles.AddCertificate),m
     { name: 'organizationImage', maxCount: 1 },
 ]),expressAsyncHandler(CertificateController.AddCertificate))
 
-CertificateRouter.get("/Getcertificate",auth(CertificateRoles.GetCertificate),expressAsyncHandler(CertificateController.Getcertificate))
+CertificateRouter.get("/GetAllCertificates",auth(CertificateRoles.GetCertificate),expressAsyncHandler(CertificateController.GetAllCertificates))
 CertificateRouter.get("/GetSinglecertificate/:id",auth(CertificateRoles.GetCertificate),expressAsyncHandler(CertificateController.GetSinglecertificate))
 
 CertificateRouter.put("/UpdateCertificate/:id",auth(CertificateRoles.updateCertificate),mullterMiddleHost({ extensions: allowedExtensions.image }).fields([

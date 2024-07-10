@@ -12,6 +12,14 @@ export const AddCertificate = async (req, res, next) => {
         testCost, totalCost,
         SubSpecialtyId,Level
     } = req.body;
+    const Certificatee = await Certificate.findOne({certificateName});
+        if (Certificatee) {
+            return res.status(404).json({
+                status: 404,
+                success: false,
+                message: "This Certificate Exist before"
+            });
+        }
     console.log(req.body);
     const subSpecialty = await SubSpecialty.findById(SubSpecialtyId);
         if (!subSpecialty) {
@@ -21,7 +29,8 @@ export const AddCertificate = async (req, res, next) => {
                 message: "SubSpecialty not found"
             });
         }
-
+        
+        
         const uploadImage = async (image, folderPath) => {
             if (!image) return null;
             const result = await CloudinaryConnection().uploader.upload(image.path, {
@@ -75,7 +84,7 @@ export const AddCertificate = async (req, res, next) => {
         });
 };
 //& =========================== Get All certificate ========================
-export const Getcertificate = async (req, res, next) => {
+export const GetAllCertificates = async (req, res, next) => {
     try {
         const certificates = await Certificate.find()
             .populate([{ path: 'directEducations' }, { path: 'selfEducations' }, { path: 'supportSides' }]);
@@ -103,7 +112,7 @@ export const Getcertificate = async (req, res, next) => {
         });
     }
 };
-//& =========================== Get All certificate ========================
+//& =========================== Get Single certificate ========================
 export const GetSinglecertificate = async (req, res, next) => {
     const {id} = req.params
     try {

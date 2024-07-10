@@ -4,7 +4,7 @@ import CloudinaryConnection from "../../utils/cloudinary.js"
 
 // & ===================================== Add  supportSide ===========================
 export const AddSupportSide = async (req,res,next) =>{
-    const {supportSideTitle} = req.body
+    const {supportSideTitle , supportSideUrl} = req.body
     const {id} = req.params
 
     const CertificateData = await Certificate.findById(id)
@@ -26,7 +26,7 @@ export const AddSupportSide = async (req,res,next) =>{
         folder:`${CertificateData.certificateImage.public_id}/${supportSideTitle}`
     })
     const supportSide =  SupportSide.create({
-        supportSideTitle,
+        supportSideTitle,supportSideUrl,
         Image:{
             secure_url,
             public_id
@@ -51,7 +51,7 @@ export const AddSupportSide = async (req,res,next) =>{
 // & ======================== Update supportSide ===========================
 export const UpdateSupportSide = async (req,res,next)=>{
     const {id} = req.params
-    const {supportSideTitle} = req.body
+    const {supportSideTitle,supportSideUrl} = req.body
 
     const supportSideData = await SupportSide.findById(id)
     if(!supportSideData){
@@ -72,6 +72,12 @@ export const UpdateSupportSide = async (req,res,next)=>{
     if(supportSideTitle && supportSideData.supportSideTitle!==supportSideTitle){
         supportSideData.supportSideTitle = supportSideTitle
     }
+    if(supportSideUrl){
+        supportSideData.supportSideUrl = supportSideUrl
+    }
+
+
+    
     const updatedSupportSide = await supportSideData.save()
     return res.status(200).json({
         status:200,

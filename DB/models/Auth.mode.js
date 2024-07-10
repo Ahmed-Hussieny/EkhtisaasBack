@@ -78,6 +78,9 @@ const AuthSchema = new Schema({
     },
     otp:{
         type:String
+    },
+    countOfVisitors:{
+        type: Number,
     }
 }, {
     timestamps: true

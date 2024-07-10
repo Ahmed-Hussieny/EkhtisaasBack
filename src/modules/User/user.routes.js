@@ -72,4 +72,31 @@ UserRoute.get(
   expressAsyncHandler(UserController.GetAllUsers)
 );
 
+UserRoute.get(
+  "/CountOfVisitors",
+  auth(endpointsRoles.GETALLUSERS),
+  expressAsyncHandler(UserController.CountOfVisitors)
+);
+UserRoute.get(
+  "/CountOfVisitorsForsingle/:id",
+  auth(endpointsRoles.GETALLUSERS),
+  expressAsyncHandler(UserController.CountOfVisitorsForsingle)
+);
+UserRoute.post(
+  "/sendEmailFromHomePage",
+  expressAsyncHandler(UserController.sendEmailFromHomePage)
+);
+UserRoute.post(
+  "/sendEmailFromContactUsPage",
+  expressAsyncHandler(UserController.sendEmailFromContactUsPage)
+);
+
+UserRoute.post(
+  "/PutTheWebsiteInformation",
+  expressAsyncHandler(UserController.PutTheWebsiteInformation)
+);
+
+
+
+
 export default UserRoute;

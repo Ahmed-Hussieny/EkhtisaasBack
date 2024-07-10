@@ -4,5 +4,5 @@ export const MainSpecialtyRoles = {
     AddMainSpecialty:[systemRoles.ADMIN],
     updateMainSpecialty:[systemRoles.ADMIN],
     DeleteMainSpecialty:[systemRoles.ADMIN],
-    GetMainSpecialty:[systemRoles.ADMIN],
+    GetMainSpecialty:[systemRoles.ADMIN,systemRoles.USER],
 }

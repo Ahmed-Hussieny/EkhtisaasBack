@@ -4,5 +4,5 @@ export const AdvisorRoles = {
     AddAdvisor:[systemRoles.ADMIN],
     updateAdvisor:[systemRoles.ADMIN],
     DeleteAdvisor:[systemRoles.ADMIN],
-    GetAdvisor:[systemRoles.ADMIN],
+    GetAdvisor:[systemRoles.ADMIN,systemRoles.USER],
 }
