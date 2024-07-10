@@ -13,7 +13,7 @@ import supportSideRouter from "./modules/supportSide/supportSide.routes.js";
 import AdvisorRouter from "./modules/Advisor/Advisor.routes.js";
 import SpecialistRouter from "./modules/Specialist/Specialist.routes.js";
 const app = express();
-app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(cors({ origin: ['http://localhost:3001','https://webeu.info'] }));
 
 app.use(express.json())
 config();
