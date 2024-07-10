@@ -31,20 +31,19 @@ const AdvisorSchema = new Schema({
     },
     email:{
         type:String,
-        required:true,
-        unique:true
+       
     },
     linkedIn:{
         type:String,
-        required:true,
+       
     },
     X:{
         type:String,
-        required:true,
+       
     },
     website:{
         type:String,
-        required:true,
+       
     },
     Rate:{
         type:Number,
