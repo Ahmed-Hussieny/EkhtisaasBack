@@ -543,7 +543,7 @@ export const sendEmailFromHomePage = async(req,res,next)=>{
   const {country , educationLevel , fullName,specialization}=req.body
   console.log(country);
   const isEmailsent = await sendEmailService({
-    to: process.env.EMAIL,
+    to: "info@ekhtisaas.com",
     subject: "Knowing The Customer",
     message: SendEmailFromHomePage({ country , educationLevel , fullName,specialization }),
   });
@@ -561,7 +561,7 @@ export const sendEmailFromHomePage = async(req,res,next)=>{
 export const sendEmailFromContactUsPage = async(req,res,next)=>{
   const { name , email , text }=req.body
   const isEmailsent = await sendEmailService({
-    to: process.env.EMAIL,
+    to: "info@ekhtisaas.com",
     subject: "From Client",
     message: SendEmailToAdminFromContactUs({ name , email , text }),
   });
