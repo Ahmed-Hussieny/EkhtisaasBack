@@ -28,7 +28,8 @@ export const SignUpSchema = {
     EmploymentStatus: Joi.string(),
     role: Joi.string().valid('User','Admin'),
     status: Joi.string().valid('online', 'offline'),
-    JobTitle: Joi.string()
+    JobTitle: Joi.string(),
+    Verified:Joi.boolean()
   }),
 };
 
