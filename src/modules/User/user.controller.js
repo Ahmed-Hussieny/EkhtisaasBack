@@ -22,7 +22,8 @@ export const signUp = async (req, res, next) => {
     Specialization,
     EmploymentStatus,
     JobTitle,
-    role
+    role,
+    Verified
   } = req.body;
 
   // & check if Email already exists in the database
@@ -59,7 +60,8 @@ export const signUp = async (req, res, next) => {
     Specialization,
     EmploymentStatus,
     JobTitle,
-    role
+    role,
+    Verified
   });
   if(!newUser){
     return next(
