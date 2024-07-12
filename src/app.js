@@ -1,6 +1,5 @@
 import { config } from "dotenv";
 import express from "express";
-import cors from "cors";
 import db_Connection from "../DB/connection.js";
 import UserRoute from "./modules/User/user.routes.js";
 import { globalResponse } from "./middleWares/globalResponce.js";
@@ -15,16 +14,6 @@ import SpecialistRouter from "./modules/Specialist/Specialist.routes.js";
 
 const app = express();
 
-app.use(cors({
-  origin: [
-    'http://localhost:3001',
-    'https://webeu.info',
-    'http://localhost:3000',
-    'https://ekhtisaas.com',
-    'http://ekhtisaas.com',
-    'https://your-https-origin.com' // Add your HTTPS origin here
-  ]
-}));
 
 app.use(express.json());
 config();
