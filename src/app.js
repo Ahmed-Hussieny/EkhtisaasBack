@@ -1,6 +1,10 @@
+// src/app.js
+
 import { config } from "dotenv";
 import express from "express";
 import cors from "cors";
+import fs from 'fs';
+import https from 'https';
 import db_Connection from "../DB/connection.js";
 import UserRoute from "./modules/User/user.routes.js";
 import { globalResponse } from "./middleWares/globalResponce.js";
@@ -14,13 +18,19 @@ import AdvisorRouter from "./modules/Advisor/Advisor.routes.js";
 import SpecialistRouter from "./modules/Specialist/Specialist.routes.js";
 
 const app = express();
-app.use(cors({
-    origin: ["https://ekhtisaas.com","http://localhost:3000/"],
-    credentials: true,
-  }));
+const corsOptions = {
+  origin: ['https://ekhtisaas.com', 'http://localhost:3000','https://webeu.info','http://ekhtisaas.com','http://localhost:3001'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
+
 config();
 db_Connection();
+
 app.use('/user', UserRoute);
 app.use('/MainSpecialty', MainSpecialtyRouter);
 app.use('/SubSpecialty', SubSpecialtyRouter);
