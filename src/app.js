@@ -15,14 +15,7 @@ import SpecialistRouter from "./modules/Specialist/Specialist.routes.js";
 
 const app = express();
 
-app.use(cors({
-  origin: [
-    'http://localhost:3001',
-    'http://localhost:3000',
-    'https://ekhtisaas.com' 
-  ]
-}));
-
+app.use(cors());
 app.use(express.json());
 config();
 db_Connection();
