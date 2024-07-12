@@ -14,8 +14,10 @@ import AdvisorRouter from "./modules/Advisor/Advisor.routes.js";
 import SpecialistRouter from "./modules/Specialist/Specialist.routes.js";
 
 const app = express();
-
-app.use(cors());
+app.use(cors({
+    origin: true,
+    credentials: true,
+  }));
 app.use(express.json());
 config();
 db_Connection();
