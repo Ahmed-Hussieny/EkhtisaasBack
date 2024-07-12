@@ -1,5 +1,3 @@
-// index.js
-
 import { config } from "dotenv";
 import fs from 'fs';
 import https from 'https';
@@ -7,7 +5,7 @@ import app from "./src/app.js";
 
 config();
 
-const port = process.env.PORT || 3001;
+const port = 443; // Change to port 443
 
 // SSL Certificate
 const privateKey = fs.readFileSync('/etc/letsencrypt/live/ekhtisaas.com/privkey.pem', 'utf8');
@@ -23,7 +21,7 @@ const credentials = {
 app.get("/", async (req, res, next) => {
   return res.json({
     status: 200,
-    message: "Welcome in Ekhtisaas ..!",
+    message: "Welcome to Ekhtisaas ..!",
   });
 });
 
