@@ -1,6 +1,6 @@
 import { config } from "dotenv";
 import express from "express";
-import cors from "cors";
+import cors from "cors"; 
 import db_Connection from "../DB/connection.js";
 import UserRoute from "./modules/User/user.routes.js";
 import { globalResponse } from "./middleWares/globalResponce.js";
@@ -16,8 +16,7 @@ import SpecialistRouter from "./modules/Specialist/Specialist.routes.js";
 config();
 const app = express();
 
-// Enable CORS for all origins
-app.use(cors());
+app.use(cors({ origin: 'https://ekhtisaas.com' }));
 
 app.use(express.json());
 
