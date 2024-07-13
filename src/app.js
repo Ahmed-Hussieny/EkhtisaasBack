@@ -16,7 +16,7 @@ import SpecialistRouter from "./modules/Specialist/Specialist.routes.js";
 config();
 const app = express();
 
-app.use(cors({ origin: ['http://localhost:3001','https://webeu.info','http://localhost:3000','https://ekhtisaas.com','http://ekhtisaas.com'] }));
+app.use(cors({ origin: ['https://webeu.info','https://ekhtisaas.com'] }));
 
 app.use(express.json());
 
