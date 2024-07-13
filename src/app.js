@@ -12,25 +12,26 @@ import selfEducationRouter from "./modules/selfEducation/selfEducation.routes.js
 import supportSideRouter from "./modules/supportSide/supportSide.routes.js";
 import AdvisorRouter from "./modules/Advisor/Advisor.routes.js";
 import SpecialistRouter from "./modules/Specialist/Specialist.routes.js";
+
+config();
 const app = express();
+
 app.use(cors({ origin: ['http://localhost:3001','https://webeu.info','http://localhost:3000','https://ekhtisaas.com','http://ekhtisaas.com'] }));
 
-app.use(express.json())
-config();
-db_Connection()
-app.use('/user', UserRoute)
-app.use('/MainSpecialty', MainSpecialtyRouter)
-app.use('/SubSpecialty', SubSpecialtyRouter)
-app.use('/Certificate',CertificateRouter)
-app.use('/directEducation',directEducationRouter)
-app.use('/selfEducation',selfEducationRouter)
-app.use('/supportSide',supportSideRouter)
-app.use('/Advisor',AdvisorRouter)
-app.use('/Specialist',SpecialistRouter)
+app.use(express.json());
 
+db_Connection();
 
+app.use('/user', UserRoute);
+app.use('/MainSpecialty', MainSpecialtyRouter);
+app.use('/SubSpecialty', SubSpecialtyRouter);
+app.use('/Certificate', CertificateRouter);
+app.use('/directEducation', directEducationRouter);
+app.use('/selfEducation', selfEducationRouter);
+app.use('/supportSide', supportSideRouter);
+app.use('/Advisor', AdvisorRouter);
+app.use('/Specialist', SpecialistRouter);
 
-
-app.use(globalResponse)
+app.use(globalResponse);
 
 export default app;
