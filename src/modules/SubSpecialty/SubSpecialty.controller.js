@@ -1,3 +1,4 @@
+import Certificate from "../../../DB/models/Certificate.model.js"
 import MainSpecialty from "../../../DB/models/MainSpecialty.model.js"
 import SubSpecialty from "../../../DB/models/SubSpecialty.model.js"
 import CloudinaryConnection from "../../utils/cloudinary.js"
@@ -127,6 +128,13 @@ export const DeleteSubSpecialty = async (req,res,next) => {
         })
     }
     await CloudinaryConnection().uploader.destroy(subSpecialtyData.Image.public_id)
+    const certificates = await Certificate.find({SubSpecialtyId:id})
+    for (const it of certificates) {
+        await CloudinaryConnection().uploader.destroy(it.certificateImage.public_id)
+        await CloudinaryConnection().uploader.destroy(it.organizationImage.public_id)
+
+    }
+    await Certificate.deleteMany({SubSpecialtyId:id})
     await SubSpecialty.findByIdAndDelete(id)
     return res.status(200).json({
         status:200,
