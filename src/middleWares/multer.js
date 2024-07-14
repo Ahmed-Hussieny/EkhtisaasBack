@@ -48,9 +48,10 @@ export const mullterMiddleHost = ({
 
   // file Filter
   const fileFilter = (req, file, cb) => {
-      if (extensions.includes(file.mimetype.split('/')[1])) {
+      if (extensions.includes(file.mimetype.split('/')[1].split('+')[0])) {
           return cb(null, true)
       }
+      console.log(file.mimetype.split('/')[1]);
       cb(new Error('Image format is not allowed!'), false)
   }
 
