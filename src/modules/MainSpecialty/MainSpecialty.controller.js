@@ -71,13 +71,13 @@ message:"Main Specialty Not Found"
     if(Title){
         MainSpecialtyData.Title = Title
         const isMainExist  =  await MainSpecialty.findOne({Title})
-        if(isMainExist){
-            return res.status(400).json({
-                status:400,
-                success:false,
-                message:"Main Specialty Already Exist"
-            })
-        }
+        // if(isMainExist){
+        //     return res.status(400).json({
+        //         status:400,
+        //         success:false,
+        //         message:"Main Specialty Already Exist"
+        //     })
+        // }
     }
     if(Description){
         MainSpecialtyData.Description = Description
