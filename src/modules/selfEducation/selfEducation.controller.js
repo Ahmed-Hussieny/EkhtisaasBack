@@ -12,14 +12,14 @@ export const AddSelfEducation = async (req,res,next) =>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Certificate Not Found"
+            message:"لم يتم العثور على الشهادة"
         })
     }
     if(!req.file){
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Image is Required"
+            message:"الصورة مطلوبة"
         })
     }
     const { secure_url, public_id } = await CloudinaryConnection().uploader.upload(req.file.path,{
@@ -38,13 +38,13 @@ export const AddSelfEducation = async (req,res,next) =>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Error in Add Self Education"
+            message:"خطأ في إضافة التعليم الذاتي"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Self Education Added Successfully",
+        message:"تمت إضافة التعليم الذاتي بنجاح",
         data:selfEducation
     })
 }
@@ -59,7 +59,7 @@ export const UpdateSelfEducation = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Self Education Not Found"
+            message:"التعليم الذاتي غير موجود"
         })
     }
     if(req.file){
@@ -80,7 +80,7 @@ export const UpdateSelfEducation = async (req,res,next)=>{
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Self Education Updated Successfully",
+        message:"تم تحديث التعليم الذاتي بنجاح",
         data:selfEducationData
     })
 }
@@ -93,7 +93,7 @@ export const DeleteSelfEducation =async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Self Education Not Found"
+            message:"التعليم الذاتي غير موجود"
         })
     }
     await CloudinaryConnection().uploader.destroy(selfEducation.Image.public_id)
@@ -101,6 +101,6 @@ export const DeleteSelfEducation =async (req,res,next)=>{
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Self Education Deleted Successfully"
+        message:"تم حذف التعليم الذاتي بنجاح"
     })
 }

@@ -12,14 +12,14 @@ export const AddSupportSide = async (req,res,next) =>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Certificate Not Found"
+            message:"لم يتم العثور على الشهادة"
         })
     }
     if(!req.file){
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Image is Required"
+            message:"الصورة مطلوبة"
         })
     }
     const { secure_url, public_id } = await CloudinaryConnection().uploader.upload(req.file.path,{
@@ -37,13 +37,13 @@ export const AddSupportSide = async (req,res,next) =>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Error in Support Side Education"
+            message:"خطأ في دعم التعليم الجانبي"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Support Side Added Successfully",
+        message:"تمت إضافة جانب الدعم بنجاح",
         data:supportSide
     })
 }
@@ -58,7 +58,7 @@ export const UpdateSupportSide = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Support Side Not Found"
+            message:"لم يتم العثور على جانب الدعم"
         })
     }
     if(req.file){
@@ -82,7 +82,7 @@ export const UpdateSupportSide = async (req,res,next)=>{
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Support Side Updated Successfully",
+        message:"تم تحديث جانب الدعم بنجاح",
         data:updatedSupportSide
     })
 }
@@ -102,6 +102,6 @@ export const DeleteSupportSide = async(req,res,next)=>{
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Support Side Deleted Successfully"
+        message:"تم حذف جانب الدعم بنجاح"
     })
 }

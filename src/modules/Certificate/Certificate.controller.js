@@ -17,7 +17,7 @@ export const AddCertificate = async (req, res, next) => {
             return res.status(404).json({
                 status: 404,
                 success: false,
-                message: "This Certificate Exist before"
+                message: "هذه الشهادة موجودة من قبل"
             });
         }
     console.log(req.body);
@@ -26,7 +26,7 @@ export const AddCertificate = async (req, res, next) => {
             return res.status(404).json({
                 status: 404,
                 success: false,
-                message: "SubSpecialty not found"
+                message: "لم يتم العثور على التخصص الفرعي"
             });
         }
         
@@ -72,14 +72,14 @@ export const AddCertificate = async (req, res, next) => {
             return res.status(400).json({
                 status: 400,
                 success: false,
-                message: "Failed to Add Certificate"
+                message: "فشل في إضافة الشهادة"
             });
         }
 
         return res.status(200).json({
             status: 200,
             success: true,
-            message: "Certificate Added Successfully",
+            message: "تمت إضافة الشهادة بنجاح",
             data: newCertificate
         });
 };
@@ -93,14 +93,14 @@ export const GetAllCertificates = async (req, res, next) => {
             return res.status(404).json({
                 status: 404,
                 success: false,
-                message: "Certificates not found"
+                message: "لم يتم العثور على الشهادات"
             });
         }
 
         return res.status(200).json({
             status: 200,
             success: true,
-            message: "All Certificates",
+            message: "جميع الشهادات",
             data: certificates
         });
     } catch (error) {
@@ -123,14 +123,14 @@ export const GetSinglecertificate = async (req, res, next) => {
             return res.status(404).json({
                 status: 404,
                 success: false,
-                message: "Certificates not found"
+                message: "لم يتم العثور على الشهادات"
             });
         }
 
         return res.status(200).json({
             status: 200,
             success: true,
-            message: "Certificate",
+            message: "شهادة",
             data: certificates
         });
     } catch (error) {
@@ -161,7 +161,7 @@ export const UpdateCertificate = async (req, res, next) => {
         return res.status(404).json({
             status:404,
             success:false,
-            message:"Certificate not found"
+            message:"لم يتم العثور على الشهادة"
         });
     }
     const subSpecialty = await SubSpecialty.findById(SubSpecialtyId);
@@ -169,7 +169,7 @@ export const UpdateCertificate = async (req, res, next) => {
         return res.status(404).json({
             status: 404,
             success: false,
-            message: "SubSpecialty not found"
+            message: "لم يتم العثور على الشهادة"
         });
     }
     const uploadImage = async (image, folderPath) => {
@@ -243,7 +243,7 @@ export const UpdateCertificate = async (req, res, next) => {
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Certificate Updated Successfully",
+        message:"تم تحديث الشهادة بنجاح",
         data:certificate
     });
 }
@@ -265,6 +265,6 @@ export const DeleteCertificate = async(req,res,next)=>{
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Certificate Deleted Successfully"
+        message:"تم حذف الشهادة بنجاح"
     })
 }

@@ -12,7 +12,7 @@ export const AddSubSpecialty = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"SubSpecialty Already Exist"
+            message:"التخصص الفرعي موجود بالفعل"
         })
     }
     const MainSpecialtyData = await MainSpecialty.findOne({Title:MainTitle})
@@ -20,7 +20,7 @@ export const AddSubSpecialty = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Faild to found MainSpecialty"
+            message:"فشل في العثور على التخصص الرئيسي"
         })
     }
 
@@ -28,7 +28,7 @@ export const AddSubSpecialty = async (req,res,next)=>{
     if(!req.file) return res.status(400).json({
         status:400,
         success:false,
-        message:"Please Upload Image"
+        message:"يرجى تحميل الصورة"
     })
     const { secure_url, public_id } = await CloudinaryConnection().uploader.upload(req.file.path,{
         folder:`${process.env.MAIN_FOLDER}/MainSpecialty/${MainSpecialtyData.Title}/SubSpecialty/${Title}`
@@ -47,13 +47,13 @@ export const AddSubSpecialty = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Failed to Add Sub Specialty"
+            message:"فشل في إضافة التخصص الفرعي"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Sub Specialty Added Successfully",
+        message:"تمت إضافة التخصص الفرعي بنجاح",
         data:NewMainSpecialty
     })
 }
@@ -69,7 +69,7 @@ export const updateSubSpecialty = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Sub Specialty Not Found"
+            message:"التخصص الفرعي غير موجود"
         })
     }
     if(req.file){
@@ -87,7 +87,7 @@ export const updateSubSpecialty = async (req,res,next)=>{
             return res.status(400).json({
                 status:400,
                 success:false,
-                message:"Sub Specialty Already Exist"
+                message:"التخصص الفرعي موجود بالفعل"
             })
         }
     }
@@ -98,7 +98,7 @@ export const updateSubSpecialty = async (req,res,next)=>{
             return res.status(400).json({
                 status:400,
                 success:false,
-                message:"Main Specialty Not Found"
+                message:"التخصص الرئيسي غير موجود"
             })
         }
         SubSpecialtyData.MainSpecialtyId = MainSpecialtyData._id
@@ -110,7 +110,7 @@ export const updateSubSpecialty = async (req,res,next)=>{
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Sub Specialty Updated Successfully",
+        message:"تم تحديث التخصص الفرعي بنجاح",
         data:SubSpecialtyData
     })
 }
@@ -124,7 +124,7 @@ export const DeleteSubSpecialty = async (req,res,next) => {
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Main Specialty Not Found"
+            message:"التخصص الرئيسي غير موجود"
         })
     }
     await CloudinaryConnection().uploader.destroy(subSpecialtyData.Image.public_id)
@@ -139,7 +139,7 @@ export const DeleteSubSpecialty = async (req,res,next) => {
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Sub Specialty Deleted Successfully"
+        message:"تم حذف التخصص الفرعي بنجاح"
     })
 }
 
@@ -150,13 +150,13 @@ export const GetAllSubSpecialties = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Sub Specialty Not Found"
+            message:"التخصص الفرعي غير موجود"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Sub Specialty Found",
+        message:"تم العثور على التخصص الفرعي",
         data:SubSpecialties
     })
 }
@@ -168,13 +168,13 @@ export const GetSingleSubSpecialty = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Sub Specialty Not Found"
+            message:"التخصص الفرعي غير موجود"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Sub Specialty Found",
+        message:"تم العثور على التخصص الفرعي",
         data:singleSubSpecialty
     })
 }

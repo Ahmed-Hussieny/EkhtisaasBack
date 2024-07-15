@@ -12,14 +12,14 @@ export const AddDirectEducation = async (req,res,next) =>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Certificate Not Found"
+            message:"لم يتم العثور على الشهادة"
         })
     }
     if(!req.file){
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Image is Required"
+            message:"الصورة مطلوبة"
         })
     }
     const { secure_url, public_id } = await CloudinaryConnection().uploader.upload(req.file.path,{
@@ -38,13 +38,13 @@ export const AddDirectEducation = async (req,res,next) =>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Error in Add Direct Education"
+            message:"خطأ في إضافة التعليم المباشر"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Direct Education Added Successfully",
+        message:"تمت إضافة التعليم المباشر بنجاح",
         data:directEducation
     })
 }
@@ -59,7 +59,7 @@ export const UpdateDirectEducation = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Direct Education Not Found"
+            message:"التعليم المباشر غير موجود"
         })
     }
     if(req.file){
@@ -81,13 +81,13 @@ export const UpdateDirectEducation = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Error in Update Direct Education"
+            message:"خطأ في تحديث التعليم المباشر"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Direct Education Updated Successfully",
+        message:"تم تحديث التعليم المباشر بنجاح",
         data:updatedDirectEducation
     })
 }
@@ -100,7 +100,7 @@ export const DeleteDirectEducation = async(req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Direct Education Not Found"
+            message:"التعليم المباشر غير موجود"
         })
     }
     await CloudinaryConnection().uploader.destroy(directEducation.Image.public_id)
@@ -108,6 +108,6 @@ export const DeleteDirectEducation = async(req,res,next)=>{
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Direct Education Deleted Successfully"
+        message:"تم حذف التعليم المباشر بنجاح"
     })
 }

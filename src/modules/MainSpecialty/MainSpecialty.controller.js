@@ -11,14 +11,14 @@ export const AddMainSpecialty = async(req,res,next) =>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Main Specialty Already Exist"
+            message:"التخصص الرئيسي موجود بالفعل"
         })
     }
     if(!req.file) return res.status(400).json({
         status:400,
         success:false,
         
-message:"Please Upload Image"
+message:"يرجى تحميل الصورة"
     })
     const { secure_url, public_id } = await CloudinaryConnection().uploader.upload(req.file.path,{
         folder:`${process.env.MAIN_FOLDER}/MainSpecialty/${Title}`
@@ -36,13 +36,13 @@ message:"Please Upload Image"
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Failed to Add Main Specialty"
+            message:"فشل في إضافة التخصص الرئيسي"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Main Specialty Added Successfully",
+        message:"تمت إضافة التخصص الرئيسي بنجاح",
         data:NewMainSpecialty
     })
 }
@@ -57,7 +57,7 @@ export const updateMainSpecialty = async (req,res,next)=>{
             status:400,
             success:false,
             
-message:"Main Specialty Not Found"
+message:"التخصص الرئيسي غير موجود"
         })
     }
     if(req.file){
@@ -70,14 +70,6 @@ message:"Main Specialty Not Found"
     }
     if(Title){
         MainSpecialtyData.Title = Title
-        const isMainExist  =  await MainSpecialty.findOne({Title})
-        // if(isMainExist){
-        //     return res.status(400).json({
-        //         status:400,
-        //         success:false,
-        //         message:"Main Specialty Already Exist"
-        //     })
-        // }
     }
     if(Description){
         MainSpecialtyData.Description = Description
@@ -87,7 +79,7 @@ message:"Main Specialty Not Found"
         status:200,
         success:true,
         
-message:"Main Specialty Updated Successfully",
+message:"تم تحديث التخصص الرئيسي بنجاح",
         data:MainSpecialtyData
     })
 }
@@ -101,7 +93,7 @@ export const DeleteMainSpecialty = async (req,res,next) => {
             status:400,
             success:false,
             
-message:"Main Specialty Not Found"
+message:"التخصص الرئيسي غير موجود"
         })
     }
     await CloudinaryConnection().uploader.destroy(MainSpecialtyData.Image.public_id)
@@ -110,7 +102,7 @@ message:"Main Specialty Not Found"
         status:200,
         success:true,
         
-message:"Main Specialty Deleted Successfully"
+message:"تم حذف التخصص الرئيسي بنجاح"
     })
 }
 //& ========================= GET MAIN Specialty ==============================
@@ -121,14 +113,14 @@ export const GetAllMainSpecialties = async (req,res,next)=>{
             status:400,
             success:false,
             
-message:"Main Specialty Not Found"
+message:"التخصص الرئيسي غير موجود"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
         
-message:"Main Specialty Found",
+message:"تم العثور على التخصص الرئيسي",
         data:MainSpecialties
     })
 }
@@ -140,13 +132,13 @@ export const GetSingleMainSpecialty = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Main Specialty Not Found"
+            message:"التخصص الرئيسي غير موجود"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Main Specialty Found",
+        message:"التخصص الرئيسي",
         data:singleMainSpecialty
     })
 }

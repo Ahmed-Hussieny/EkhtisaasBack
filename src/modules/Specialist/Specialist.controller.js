@@ -12,14 +12,14 @@ export const AddSpecialist = async (req,res,next)=>{
             return res.status(400).json({
                 success:false,
                 status:400,
-                message:"Specialist already exist"
+                message:"متخصص موجود بالفعل"
             })
         }
         if(!req.file){
             return res.status(400).json({
                 success:false,
                 status:400,
-                message:"Image is Required"
+                message:"الصورة مطلوبة"
             })
         }
         const { secure_url, public_id } = await CloudinaryConnection().uploader.upload(req.file.path,{
@@ -47,13 +47,13 @@ export const AddSpecialist = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Failed to Add Specialist"
+            message:"فشل في إضافة متخصص"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Specialist Added Successfully",
+        message:"تمت إضافة المتخصص بنجاح",
         data:newSpecialist
     })
 }
@@ -70,7 +70,7 @@ export const updateSpecialist =async (req,res,next)=>{
             return res.status(400).json({
                 success:false,
                 status:400,
-                message:"Specialist Not Found"
+                message:"لم يتم العثور على المتخصص"
             })
         }
         if(name){
@@ -123,7 +123,7 @@ export const updateSpecialist =async (req,res,next)=>{
         return res.status(200).json({
             status:200,
             success:true,
-            message:"Specialist Updated Successfully",
+            message:"تم تحديث المتخصص بنجاح",
             data:updatedSpecialist
         })
 }
@@ -136,7 +136,7 @@ export const DeleteSpecialist = async(req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"specialist Not Found"
+            message:"متخصص غير موجود"
         })
     }
     await CloudinaryConnection().uploader.destroy(specialist.Image.public_id)
@@ -144,7 +144,7 @@ export const DeleteSpecialist = async(req,res,next)=>{
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Specialist Deleted Successfully"
+        message:"تم حذف التخصص بنجاح"
     })
 }
 // & ===================== Get All Specialists =============================
@@ -154,13 +154,13 @@ export const GetAllSpecialists = async(req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"No Specialists Found"
+            message:"لم يتم العثور على متخصصين"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"All Specialists",
+        message:"جميع المتخصصين",
         data:Specialists
     })
 }
@@ -173,13 +173,13 @@ export const GetSingleSpecialist = async(req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"specialist Not Found"
+            message:"متخصص غير موجود"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Single Specialist",
+        message:"متخصص واحد",
         data:specialist
     })
 }

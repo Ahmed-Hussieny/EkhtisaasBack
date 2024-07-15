@@ -12,14 +12,14 @@ export const AddAdvisor = async (req,res,next)=>{
             return res.status(400).json({
                 success:false,
                 status:400,
-                message:"Advisor already exist"
+                message:"المستشار موجود بالفعل"
             })
         }
         if(!req.file){
             return res.status(400).json({
                 success:false,
                 status:400,
-                message:"Image is Required"
+                message:"الصورة مطلوبة"
             })
         }
         const { secure_url, public_id } = await CloudinaryConnection().uploader.upload(req.file.path,{
@@ -47,13 +47,13 @@ export const AddAdvisor = async (req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Failed to Add Advisor"
+            message:"فشل في إضافة مستشار"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Advisor Added Successfully",
+        message:"تمت إضافة المستشار بنجاح",
         data:newAdvisor
     })
 }
@@ -70,7 +70,7 @@ export const updateAdvisor =async (req,res,next)=>{
             return res.status(400).json({
                 success:false,
                 status:400,
-                message:"Advisor Not Found"
+                message:"لم يتم العثور على المستشار"
             })
         }
         if(name){
@@ -120,7 +120,7 @@ export const updateAdvisor =async (req,res,next)=>{
         return res.status(200).json({
             status:200,
             success:true,
-            message:"Advisor Updated Successfully",
+            message:"تم تحديث المستشار بنجاح",
             data:updatedAdvisor
         })
 }
@@ -133,7 +133,7 @@ export const DeleteAdvisor = async(req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Advisor Not Found"
+            message:"لم يتم العثور على المستشار"
         })
     }
     await CloudinaryConnection().uploader.destroy(advisor.Image.public_id)
@@ -141,7 +141,7 @@ export const DeleteAdvisor = async(req,res,next)=>{
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Advisor Deleted Successfully"
+        message:"تم حذف المستشار بنجاح"
     })
 }
 // & ===================== Get All Advisors =============================
@@ -151,13 +151,13 @@ export const GetAllAdvisors = async(req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"No Advisors Found"
+            message:"لم يتم العثور على المستشار"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"All Advisors",
+        message:"جميع المستشارين",
         data:advisors
     })
 }
@@ -170,13 +170,13 @@ export const GetSingleAdvisor = async(req,res,next)=>{
         return res.status(400).json({
             status:400,
             success:false,
-            message:"Advisor Not Found"
+            message:"لم يتم العثور على المستشار"
         })
     }
     return res.status(200).json({
         status:200,
         success:true,
-        message:"Single Advisor",
+        message:"مستشار واحد",
         data:advisor
     })
 }
