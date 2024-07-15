@@ -6,7 +6,7 @@ const supportSideSchema = new Schema({
             secure_url: { type: String, required: true },
             public_id: { type: String, required: true, unique: true }
         }
-        ,supportSideUrl:{type: String, required: true }
+        ,supportSideUrl:{type: String}
     ,CertificateId:{
         type:Schema.Types.ObjectId,
         ref:'Certificate',

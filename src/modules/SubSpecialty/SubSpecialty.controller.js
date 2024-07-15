@@ -2,6 +2,9 @@ import Certificate from "../../../DB/models/Certificate.model.js"
 import MainSpecialty from "../../../DB/models/MainSpecialty.model.js"
 import SubSpecialty from "../../../DB/models/SubSpecialty.model.js"
 import CloudinaryConnection from "../../utils/cloudinary.js"
+import SelfEducation from '../../../DB/models/selfEducation.model.js';
+import DirectEducation from '../../../DB/models/directEducation.model.js';
+import SupportSide from '../../../DB/models/supportSide.model.js';
 
 //& ========================== ADD SubSpecialty =============================
 export const AddSubSpecialty = async (req,res,next)=>{
@@ -128,13 +131,35 @@ export const DeleteSubSpecialty = async (req,res,next) => {
         })
     }
     await CloudinaryConnection().uploader.destroy(subSpecialtyData.Image.public_id)
-    const certificates = await Certificate.find({SubSpecialtyId:id})
-    for (const it of certificates) {
-        await CloudinaryConnection().uploader.destroy(it.certificateImage.public_id)
-        await CloudinaryConnection().uploader.destroy(it.organizationImage.public_id)
-
-    }
-    await Certificate.deleteMany({SubSpecialtyId:id})
+    const CertificateDeleted =await Certificate.find({SubSpecialtyId:id})
+    if(CertificateDeleted){
+        CertificateDeleted.map(async (item)=>{
+            await CloudinaryConnection().uploader.destroy(item.certificateImage.public_id)
+            await CloudinaryConnection().uploader.destroy(item.organizationImage.public_id)
+                                const SelfEducationDeleted =await SelfEducation.find({CertificateId:item._id})
+                    if(SelfEducationDeleted){
+                        SelfEducationDeleted.map(async (item2)=>{
+                            await CloudinaryConnection().uploader.destroy(item2.Image.public_id)
+                            await SelfEducation.deleteOne({_id:item2._id})
+                        }
+                        )}
+                        const DirectEducationDeleted =await DirectEducation.find({CertificateId:item._id})
+                    if(DirectEducationDeleted){
+                        DirectEducationDeleted.map(async (item2)=>{
+                            await CloudinaryConnection().uploader.destroy(item2.Image.public_id)
+                            await DirectEducation.deleteOne({_id:item2._id})
+                        }
+                        )}
+                        const SupportSideDeleted =await SupportSide.find({CertificateId:item._id})
+                    if(SupportSideDeleted){
+                        SupportSideDeleted.map(async (item2)=>{
+                            await CloudinaryConnection().uploader.destroy(item2.Image.public_id)
+                            await SupportSide.deleteOne({_id:item2._id})
+                        }
+                        )}
+            await Certificate.deleteOne({_id:item._id})
+        }
+        )}
     await SubSpecialty.findByIdAndDelete(id)
     return res.status(200).json({
         status:200,

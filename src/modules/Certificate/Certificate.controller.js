@@ -1,5 +1,8 @@
 import Certificate from "../../../DB/models/Certificate.model.js";
 import SubSpecialty from "../../../DB/models/SubSpecialty.model.js";
+import DirectEducation from "../../../DB/models/directEducation.model.js";
+import SelfEducation from "../../../DB/models/selfEducation.model.js";
+import SupportSide from "../../../DB/models/supportSide.model.js";
 import CloudinaryConnection from "../../utils/cloudinary.js";
 //& =========================== Add certificate ========================
 export const AddCertificate = async (req, res, next) => {
@@ -261,6 +264,28 @@ export const DeleteCertificate = async(req,res,next)=>{
     }
     await CloudinaryConnection().uploader.destroy(certificate.certificateImage.public_id)
     await CloudinaryConnection().uploader.destroy(certificate.organizationImage.public_id)
+
+    const SelfEducationDeleted =await SelfEducation.find({CertificateId:id})
+                    if(SelfEducationDeleted){
+                        SelfEducationDeleted.map(async (item2)=>{
+                            await CloudinaryConnection().uploader.destroy(item2.Image.public_id)
+                            await SelfEducation.deleteOne({_id:item2._id})
+                        }
+                        )}
+                        const DirectEducationDeleted =await DirectEducation.find({CertificateId:id})
+                    if(DirectEducationDeleted){
+                        DirectEducationDeleted.map(async (item2)=>{
+                            await CloudinaryConnection().uploader.destroy(item2.Image.public_id)
+                            await DirectEducation.deleteOne({_id:item2._id})
+                        }
+                        )}
+                        const SupportSideDeleted =await SupportSide.find({CertificateId:id})
+                    if(SupportSideDeleted){
+                        SupportSideDeleted.map(async (item2)=>{
+                            await CloudinaryConnection().uploader.destroy(item2.Image.public_id)
+                            await SupportSide.deleteOne({_id:item2._id})
+                        }
+                        )}
     await Certificate.findByIdAndDelete(id)
     return res.status(200).json({
         status:200,

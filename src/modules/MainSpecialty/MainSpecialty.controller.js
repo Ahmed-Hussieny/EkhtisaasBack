@@ -1,5 +1,10 @@
 import MainSpecialty from "../../../DB/models/MainSpecialty.model.js"
 import CloudinaryConnection from "../../utils/cloudinary.js"
+import SubSpecialty from '../../../DB/models/SubSpecialty.model.js';
+import DirectEducation from "../../../DB/models/directEducation.model.js";
+import SupportSide from "../../../DB/models/supportSide.model.js";
+import SelfEducation from "../../../DB/models/selfEducation.model.js";
+import Certificate from "../../../DB/models/Certificate.model.js";
 
 
 //& ========================= ADD MAIN Specialty ==============================
@@ -97,6 +102,45 @@ message:"التخصص الرئيسي غير موجود"
         })
     }
     await CloudinaryConnection().uploader.destroy(MainSpecialtyData.Image.public_id)
+    const SubSpecialtyDeleted =await SubSpecialty.find({MainSpecialtyId:id})
+
+    if(SubSpecialtyDeleted){
+        SubSpecialtyDeleted.map(async (item)=>{
+            await CloudinaryConnection().uploader.destroy(item.Image.public_id)
+            
+            const CertificateDeleted =await Certificate.find({SubSpecialtyId:item._id})
+            if(CertificateDeleted){
+                CertificateDeleted.map(async (item2)=>{
+                    
+                    await CloudinaryConnection().uploader.destroy(item2.certificateImage.public_id)
+                    await CloudinaryConnection().uploader.destroy(item2.organizationImage.public_id)
+                            const SelfEducationDeleted =await SelfEducation.find({CertificateId:item2._id})
+                            if(SelfEducationDeleted){
+                                SelfEducationDeleted.map(async (item2)=>{
+                                    await CloudinaryConnection().uploader.destroy(item2.Image.public_id)
+                                    await SelfEducation.deleteOne({_id:item2._id})
+                                }
+                                )}
+                                const DirectEducationDeleted =await DirectEducation.find({CertificateId:item2._id})
+                            if(DirectEducationDeleted){
+                                DirectEducationDeleted.map(async (item2)=>{
+                                    await CloudinaryConnection().uploader.destroy(item2.Image.public_id)
+                                    await DirectEducation.deleteOne({_id:item2._id})
+                                }
+                                )}
+                                const SupportSideDeleted =await SupportSide.find({CertificateId:item2._id})
+                            if(SupportSideDeleted){
+                                SupportSideDeleted.map(async (item2)=>{
+                                    await CloudinaryConnection().uploader.destroy(item2.Image.public_id)
+                                    await SupportSide.deleteOne({_id:item2._id})
+                                }
+                                )}
+                    await Certificate.deleteOne({_id:item2._id})
+                }
+                )}
+            await SubSpecialty.deleteOne({_id:item._id})
+        }
+        )}
     await MainSpecialty.findByIdAndDelete(id)
     return res.status(200).json({
         status:200,

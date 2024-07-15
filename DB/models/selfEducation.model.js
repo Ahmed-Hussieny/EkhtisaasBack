@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const selfEducationSchema = new Schema({
     selfEducationTitle:{type: String, required: true },
-    selfEducationURL:{type: String, required: true },
+    selfEducationURL:{type: String },
     Image:{
             secure_url: { type: String, required: true },
             public_id: { type: String, required: true, unique: true }

@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const directEducationSchema = new Schema({
     directEducationTitle:{type: String, required: true },
-    directEducationURL:{type: String, required: true },
+    directEducationURL:{type: String },
     Image:{
             secure_url: { type: String, required: true },
             public_id: { type: String, required: true, unique: true }
