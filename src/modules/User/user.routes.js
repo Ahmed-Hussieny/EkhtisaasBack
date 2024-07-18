@@ -73,7 +73,7 @@ UserRoute.get(
 );
 
 UserRoute.get(
-  "/CountOfVisitors",
+  "/CountOfVisitors/:day",
   // auth(endpointsRoles.GETALLUSERS),
   expressAsyncHandler(UserController.CountOfVisitors)
 );

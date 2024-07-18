@@ -22,17 +22,10 @@ const CountSchema = new Schema({
     ContactWithUS:{
         type: Number,
     },
-    LinkedIn:{
-        type:String
-    },
-    X:{
-        type:String
-    },
-    Youtube:{
-        type:String
-    },
-    Email:{
-        type:String
+    date: {
+        type: Date,
+        default: Date.now,
+        unique:true
     }
 }, {
     timestamps: true

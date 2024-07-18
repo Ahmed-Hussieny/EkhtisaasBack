@@ -10,6 +10,8 @@ import { otpEmail } from "../../utils/otpEmailBody.js";
 import Count from "../../../DB/models/Count.model.js";
 import { SendEmailFromHomePage } from "../../utils/SendEmailToAdmin.js";
 import { SendEmailToAdminFromContactUs } from "../../utils/SendEmailToAdminFromContactUs.js";
+import Contact from "../../../DB/models/Contact.model.js";
+import { startOfDay, endOfDay, subDays } from 'date-fns'
 
 //! =====================================signUp ====================================
 export const signUp = async (req, res, next) => {
@@ -466,14 +468,32 @@ export const GetAllUsers = async (req, res, next) => {
 
 //& ================= counts for Inter ===============
 export const CountOfVisitors = async (req, res, next) => {
+  const {day} = req.params 
+  console.log("ssss",day);
   try {
     // Find the count document
-    let count = await Count.findOne();
+    let date = new Date();
+
+    if (day === '1') {
+      date = subDays(date, 1); // Subtract one day to get yesterday's date
+    }
+    const startOfDayDate = startOfDay(date);
+    const endOfDayDate = endOfDay(date);
+
+    let count = await Count.findOne({
+      createdAt: {
+        $gte: startOfDayDate,
+        $lte: endOfDayDate,
+      },
+    });
+    let ContactData = await Contact.findOne();
+
     return res.status(200).json({
       status: 200,
       success: true,
-      message: "Count of Users",
-      data: count
+      message: "Data",
+      count,
+      ContactData
     });
   } catch (error) {
     next(error); // Pass errors to the error handling middleware
@@ -482,66 +502,85 @@ export const CountOfVisitors = async (req, res, next) => {
 
 //& ================= counts for Inter Of single pages ===============
 export const CountOfVisitorsForsingle = async (req, res, next) => {
-  const  {id} = req.params
+  const { id } = req.params;
+  console.log(id);
+
   try {
-    // Find the count document
-    let count = await Count.findOne();
+    // Get the start and end of the current day
+    const date = new Date();
+    const startOfDayDate = startOfDay(date);
+    const endOfDayDate = endOfDay(date);
 
-    // If no count document exists, create one with an initial count of 1
+    // Find the count document for today
+    let count = await Count.findOne({
+      createdAt: {
+        $gte: startOfDayDate,
+        $lte: endOfDayDate,
+      },
+    });
+
+    // Ensure ContactData exists
+    const contactData = await Contact.findOne();
+    if (!contactData) {
+      await Contact.create({
+        LinkedIn: "",
+        X: "",
+        Youtube: "",
+        Email: "",
+      });
+    }
+
+    // If no count document exists for today, create one with initial counts
     if (!count) {
-      count = await Count.create({ 
+      count = await Count.create({
         countOfVisitors: 0,
-        Homepage:0,
-        OurServises:0,
-        Specialties:0,
-        Certificates:0,
-        AboutUs:0,
-        ContactWithUS:0,
-        LinkedIn:"",
-        X:"",
-        Youtube:"",
-        Email:""
+        Homepage: 0,
+        OurServises: 0,
+        Specialties: 0,
+        Certificates: 0,
+        AboutUs: 0,
+        ContactWithUS: 0,
+      });
+    }
 
-       });
-    } else {
-      // Otherwise, increment the count
-      if(id==="0"){
+    // Increment the appropriate count based on id
+    switch (id) {
+      case "0":
         count.countOfVisitors += 1;
         count.Homepage += 1;
-      }
-      else if(id==="2"){
+        break;
+      case "2":
         count.OurServises += 1;
-
-      }
-      else if(id==="3"){
+        break;
+      case "3":
         count.Specialties += 1;
-
-      }
-      else if(id==="4"){
+        break;
+      case "4":
         count.Certificates += 1;
-
-      }
-      else if(id==="5"){
+        break;
+      case "5":
         count.AboutUs += 1;
-
-      }
-      else if(id==="6"){
+        break;
+      case "6":
         count.ContactWithUS += 1;
-      }
-      
-      await count.save();
+        break;
+      default:
+        break;
     }
+
+    await count.save();
 
     return res.status(200).json({
       status: 200,
       success: true,
       message: "Count of Users",
-      data: count
+      data: count,
     });
   } catch (error) {
     next(error); // Pass errors to the error handling middleware
   }
 };
+
 // & ========================== Send Email from Home Page ================
 export const sendEmailFromHomePage = async(req,res,next)=>{
   const {country , educationLevel , fullName,specialization}=req.body
@@ -582,42 +621,35 @@ export const sendEmailFromContactUsPage = async(req,res,next)=>{
 // & ========================== Put The Web site Information ================
 export const PutTheWebsiteInformation = async(req,res,next)=>{
    const { LinkedIn , X , Youtube , Email }=req.body
-   let count = await Count.findOne();
-   if (!count) {
-     count = await Count.create({ 
-       countOfVisitors: 0,
-       Homepage:0,
-       OurServises:0,
-       Specialties:0,
-       Certificates:0,
-       AboutUs:0,
-       ContactWithUS:0,
-       LinkedIn,
-       X,
-       Youtube,
-       Email
-      });
-   } 
+   const ContactData =  await Contact.findOne() 
+   if(!ContactData){
+    ContactData = await Contact.create({ 
+       LinkedIn:"",
+       X:"",
+       Youtube:"",
+       Email:""
+     })
+   }
     if(LinkedIn){
-      count.LinkedIn = LinkedIn;
+      ContactData.LinkedIn = LinkedIn;
     }
      if(X){
-      count.X =X;
+      ContactData.X =X;
     }
      if(Youtube){
-      count.Youtube = Youtube;
+      ContactData.Youtube = Youtube;
     }
      if(Email){
-      count.Email = Email;
+      ContactData.Email = Email;
 }
-     await count.save();
+     await ContactData.save();
    
 
    return res.status(200).json({
      status: 200,
      success: true,
-     message: "Count of Users",
-     data: count
+     message: "Contact Data",
+     data: ContactData
    });
  
 }
