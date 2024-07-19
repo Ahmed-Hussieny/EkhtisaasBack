@@ -9,7 +9,6 @@ const certificateSchema = new Schema({
     certificateName:{
         type:String,
         required:true,
-        // unique:true
     },
     organizationImage: {
         secure_url: { type: String, required: true },
