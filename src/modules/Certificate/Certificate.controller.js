@@ -15,14 +15,14 @@ export const AddCertificate = async (req, res, next) => {
         testCost, totalCost,
         SubSpecialtyId,Level
     } = req.body;
-    const Certificatee = await Certificate.findOne({certificateName});
-        if (Certificatee) {
-            return res.status(404).json({
-                status: 404,
-                success: false,
-                message: "هذه الشهادة موجودة من قبل"
-            });
-        }
+    // const Certificatee = await Certificate.findOne({certificateName});
+    //     if (Certificatee) {
+    //         return res.status(404).json({
+    //             status: 404,
+    //             success: false,
+    //             message: "هذه الشهادة موجودة من قبل"
+    //         });
+    //     }
     console.log(req.body);
     const subSpecialty = await SubSpecialty.findById(SubSpecialtyId);
         if (!subSpecialty) {
